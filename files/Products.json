@@ -1,0 +1,46 @@
+[
+	{
+		"id": 1,
+		"status": "ok",
+		"title": "arroz",
+		"description": "lucchetti",
+		"code": "abc123",
+		"price": 250,
+		"category": "almacen",
+		"thumbnail": "img.jpg",
+		"stock": 15
+	},
+	{
+		"id": 2,
+		"status": "ok",
+		"title": "fideos",
+		"description": "lucchetti",
+		"code": "abc223",
+		"price": 350,
+		"category": "almacen",
+		"thumbnail": "img.jpg",
+		"stock": 15
+	},
+	{
+		"id": 3,
+		"status": "ok",
+		"title": "lentejas",
+		"description": "lucchetti",
+		"code": "abc323",
+		"price": 280,
+		"category": "almacen",
+		"thumbnail": "img.jpg",
+		"stock": 24
+	},
+	{
+		"id": 4,
+		"title": "lentejonas",
+		"description": "arcor",
+		"code": "abc323",
+		"status": "ok",
+		"price": 300,
+		"category": "almacen",
+		"thumbnail": "img.jpg",
+		"stock": 9
+	}
+]
