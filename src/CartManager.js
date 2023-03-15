@@ -41,13 +41,13 @@ export default class CartManager {
                 const otherCart = { id: result.length + 1, products: [] }
                 result.push(otherCart)
                 await fs.promises.writeFile(this.path, JSON.stringify(result, null, "\t"));
-                return `Carrito creado`;
+                return `Cart created`;
             } else {
 
                 const newCart = { id: this.cart.length + 1, products: [] }
                 this.cart.push(newCart);
                 await fs.promises.writeFile(this.path, JSON.stringify(this.cart, null, "\t"));
-                return `Carrito creado2`
+                return `Cart created2`
 
             }
         } catch (error) {
@@ -75,7 +75,7 @@ export default class CartManager {
                 }
                 await fs.promises.writeFile(this.path,JSON.stringify(carts, null, "\t"));
               } else {
-                throw new Error(`Add: Carrito en ID ${cId} NO EXISTE`);
+                throw new Error(`Add: Cart en ID ${cId} Don´t Exist`);
               }
            
         } catch (error) {

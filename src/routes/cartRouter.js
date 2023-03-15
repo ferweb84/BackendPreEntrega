@@ -73,18 +73,18 @@ router.post("/:cid/product/:pid", async (req, res) => {
         }
 
         const carts = await cartmanager.getCart();
-        const cartIdFounded = carts.findIndex((cart) => cart.id === Number.parseInt(cId));
+        const cartIdEncontrado = carts.findIndex((cart) => cart.id === Number.parseInt(cId));
 
         const products = await productmanager.getProducts();
-        const productIdFounded = products.findIndex((prod) => prod.id === Number.parseInt(pId));
-        if (cartIdFounded === -1) {
+        const productIdEncontrado = products.findIndex((prod) => prod.id === Number.parseInt(pId));
+        if (cartIdEncontrado === -1) {
             return res.status(400).send({
                 status: "error",
                 message: { error: `The cart with the id ${cId} does not exist in the file` },
             });
         }
 
-        if (productIdFounded === -1) {
+        if (productIdEncontrado === -1) {
             return res.status(400).send({
                 status: "error",
                 message: { error: `The product with the id ${pId} does not exist in the file` },

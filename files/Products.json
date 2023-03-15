@@ -42,5 +42,27 @@
 		"category": "almacen",
 		"thumbnail": "img.jpg",
 		"stock": 9
+	},
+	{
+		"id": 5,
+		"status": "true",
+		"title": "polenta",
+		"description": "lucchetti",
+		"code": "abc324",
+		"price": 275,
+		"category": "almacen",
+		"thumbnail": "img.jpg",
+		"stock": 25
+	},
+	{
+		"id": 6,
+		"status": "true",
+		"title": "harina",
+		"description": "lucchetti",
+		"code": "abc425",
+		"price": 276,
+		"category": "almacen",
+		"thumbnail": "img.jpg",
+		"stock": 19
 	}
 ]

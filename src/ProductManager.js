@@ -1,6 +1,7 @@
 import fs from "fs";
 import express from "express";
 import { Blob } from "buffer";
+
 export default class ProductManager {
     constructor() {
         this.products = [];
@@ -8,8 +9,8 @@ export default class ProductManager {
         this.path = "./files/Products.json";
     }
 
-    productServer = express();
-    returnObject = async () => {
+    app = express();
+    returnObjeto = async () => {
         const data = await fs.promises.readFile(this.path, 'utf-8');
         const result = JSON.parse(data);
         return result;
@@ -40,31 +41,31 @@ export default class ProductManager {
         }
 
     }
-    addProduct = async (productObject) => {
+    addProduct = async (productObjeto) => {
 
         try {
 
-            productObject.stock > 0
-                ? productObject = { status: true, ...productObject }
-                : productObject = { status: false, ...productObject }
+            productObjeto.stock > 0
+                ? productObjeto = { status: true, ...productObjeto }
+                : productObjeto = { status: false, ...productObjeto }
 
 
 
-            // if (productObject.thumbnail[1].hasOwnProperty("fieldname")) {
-            //     const imgPaths = productObject.thumbnail.map(prod => prod.path);
-            //     productObject.thumbnail = imgPaths;
+            // if (productObjeto.thumbnail[1].hasOwnProperty("fieldname")) {
+            //     const imgPaths = productObjeto.thumbnail.map(prod => prod.path);
+            //     productObjeto.thumbnail = imgPaths;
             // }
 
             const products = await this.getProducts();
-            const productIndex = await products.findIndex((prod) => prod.code === productObject.code);
+            const productIndex = await products.findIndex((prod) => prod.code === productObjeto.code);
 
             if (productIndex === -1) {
                 products.length === 0
-                    ? productObject = { id: 1, ...productObject }
-                    : productObject = { id: products[products.length - 1].id + 1, ...productObject }
-                products.push(productObject);
+                    ? productObjeto = { id: 1, ...productObjeto }
+                    : productObjeto = { id: products[products.length - 1].id + 1, ...productObjeto }
+                products.push(productObjeto);
                 await fs.promises.writeFile(this.path, JSON.stringify(products, null, "\t"));
-                return productObject;
+                return productObjeto;
             }
 
         } catch (error) {
@@ -94,13 +95,13 @@ export default class ProductManager {
     deleteProducts = async (id) => {
         try {
             const products = await this.getProducts()
-            let productFounded = products.findIndex((product) => product.id === id)
-            if (productFounded !== -1) {
+            let productEncontrado = products.findIndex((product) => product.id === id)
+            if (productEncontrado !== -1) {
                 const valor = products.filter((event) => event.id != id);
                 await fs.promises.writeFile(this.path, JSON.stringify(valor, null, "\t"))
                 return "Product eliminated";
             } else {
-                return productFounded;
+                return productEncontrado;
             }
         } catch (error) {
             console.log(error)
@@ -113,8 +114,8 @@ export default class ProductManager {
             if (products === "error") {
                 return "The file is empty";
             }
-            let productExists = products.findIndex((product) => product.id === idUpdate)
-            if (productExists !== -1) {
+            let productExiste = products.findIndex((product) => product.id === idUpdate)
+            if (productExiste !== -1) {
 
                 const productoAmodificar = products.filter((product) => product.id === idUpdate);
 
@@ -136,7 +137,7 @@ export default class ProductManager {
                 //console.log(this.products)
                 await fs.promises.writeFile(this.path, JSON.stringify(products, null, "\t"));
             } else {
-                return productExists;
+                return productExiste;
             }
         } catch (error) {
             console.log(error)

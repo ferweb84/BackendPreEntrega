@@ -3,9 +3,6 @@ import { Router } from "express";
 
 const router = Router();
 
-// router.get("/", (req, res) => {
-//     res.send({ pets });
-// );
 const manager = new ProductManager();
 
 router.get("/", async (req, res) => {
@@ -71,74 +68,25 @@ router.get("/:pid", async (req, res) => {
         console.log(error);
     }
 });
-//router.post("/", uploader.array("thumbnails"), async (req,
-// router.post("/", async (req, res) => {
-//     try {
-//         let product = req.body;
-//         console.log(product);
-//         if (!product.title || !product.description || !product.code || !product.price || !product.stock || !product.category) {
-//             return res.status(400).send({
-//                 status: "error",
-//                 message: { error: "All the fields must not be empty" },
-//             });
-//         }
 
-//         const products = await manager.getProducts()
-//         const productIndex = await products.findIndex((prod) => prod.code === product.code);
-//         if (productIndex !== -1) {
-//             return res.status(400).send({
-//                 status: "error",
-//                 message: { error: `The product with the code${product.code} exist in the list` },
-//             });
-//         }
-//         // if (req.files) products.thumbnail = req.files;
-//         // console.log(req.files)
-//         // if (!req.files && !products.thumbnail) {
-//         //     return res.status(400).send({
-//         //         status: "error",
-//         //         message: { error: `No se pudieron guardar las miniaturas` },
-//         //     });
-//         // }
-//         //  product = await manager.addProduct(product);
-//         //return res.send(product);
-//         return res.status(201).send({
-//             status: "success",
-//             message: {
-//                 success: `Product ${product.title} successfully added`,
-//                 id: `${product.id}`,
-//             },
-//         });
-
-//     } catch (error) {
-//         console.log(error)
-//     }
-// })
 router.post("/", async (req, res) => {
     let newProduct = req.body;
     console.log(newProduct);
-    if (!newProduct.title || !newProduct.description || !newProduct.code || !newProduct.price || !newProduct.stock || !newProduct.category ) {
+    if (!newProduct.title || !newProduct.description || !newProduct.code|| !newProduct.status  || !newProduct.price || !newProduct.category || !newProduct.stock  ) {
       return res.status(400).send({
         status: "error",
-        message: { error: "Todos los campos son obligatorios" },
+        message: { error: "All fields are required" },
       });
     }
   
     if (newProduct.id || newProduct.id == 0) {
       return res.status(400).send({
         status: "error",
-        message: { error: "Producto sin ID Asignado" },
+        message: { error: "Product without ID Assinged" },
       });
     }
   
-    // if (req.files) newProduct.thumbnails = req.files;
-  
-    // if (!req.files && !newProduct.thumbnails) {
-    //   return res.status(400).send({
-    //     status: "error",
-    //     message: { error: `No se pudieron guardar las miniaturas` },
-    //   });
-    // }
-  
+
     const products = await manager.getProducts()
     const productIndex = await products.findIndex((prod) => prod.code === newProduct.code);
   
