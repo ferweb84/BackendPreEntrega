@@ -1,5 +1,6 @@
 import ProductManager from '../ProductManager.js';
 import { Router } from "express";
+import { uploader } from '../utils.js';
 
 const router = Router();
 
@@ -69,8 +70,9 @@ router.get("/:pid", async (req, res) => {
     }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", uploader.array("thumbnail"), async (req, res) => {
     let newProduct = req.body;
+    const files=req.files;
     console.log(newProduct);
     if (!newProduct.title || !newProduct.description || !newProduct.code|| !newProduct.status  || !newProduct.price || !newProduct.category || !newProduct.stock  ) {
       return res.status(400).send({
@@ -85,8 +87,31 @@ router.post("/", async (req, res) => {
         message: { error: "Product without ID Assinged" },
       });
     }
-  
+    
 
+    newProduct.thumbnail=[]
+  if (files){
+    files.forEach( file => {
+        const imgUrl= `http://localhost:8080/img/${file.filename}`
+        newProduct.thumbnail.push (imgUrl) 
+        return res.send({status:"Success"});   
+    });
+    
+  }
+
+
+  if (!req.files && !newProduct.thumbnail) {
+    return res
+    .status(400)
+    .send({status: "error",message: { error: `No se pudo agregar el archivo` },
+    });
+  }
+//   const product =req.body;
+//   product.thumbnail = `http://localhost:8080/img/${filename}`;
+//   product.push(product);
+//   return res.send({status:"Success"});
+
+  
     const products = await manager.getProducts()
     const productIndex = await products.findIndex((prod) => prod.code === newProduct.code);
   

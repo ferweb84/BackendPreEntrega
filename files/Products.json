@@ -64,5 +64,62 @@
 		"category": "almacen",
 		"thumbnail": "img.jpg",
 		"stock": 19
+	},
+	{
+		"id": 7,
+		"status": "true",
+		"title": "yerba",
+		"description": "amanda",
+		"code": "abc555",
+		"price": "356",
+		"category": "almacen",
+		"stock": "23",
+		"thumbnail": [
+			{
+				"fieldname": "thumbnail",
+				"originalname": "yerba-amanda-500.png",
+				"encoding": "7bit",
+				"mimetype": "image/png",
+				"destination": "D:\\ESCRITORIO TECNO\\backend\\Desafio4\\PreEntrega\\src/public/img",
+				"filename": "1679002011558-yerba-amanda-500.png",
+				"path": "D:\\ESCRITORIO TECNO\\backend\\Desafio4\\PreEntrega\\src\\public\\img\\1679002011558-yerba-amanda-500.png",
+				"size": 94286
+			}
+		]
+	},
+	{
+		"id": 8,
+		"status": "true",
+		"title": "yerbamate",
+		"description": "amanda",
+		"code": "abc5557",
+		"price": "3588",
+		"category": "almacen",
+		"stock": "25",
+		"thumbnail": [
+			{
+				"fieldname": "thumbnail",
+				"originalname": "yerba-amanda-500.png",
+				"encoding": "7bit",
+				"mimetype": "image/png",
+				"destination": "D:\\ESCRITORIO TECNO\\backend\\Desafio4\\PreEntrega\\src/public/img",
+				"filename": "1679010472023-yerba-amanda-500.png",
+				"path": "D:\\ESCRITORIO TECNO\\backend\\Desafio4\\PreEntrega\\src\\public\\img\\1679010472023-yerba-amanda-500.png",
+				"size": 94286
+			}
+		]
+	},
+	{
+		"id": 9,
+		"status": "true",
+		"title": "yerbamatee",
+		"description": "amanda",
+		"code": "abc57",
+		"price": "354",
+		"category": "almacen",
+		"stock": "4",
+		"thumbnail": [
+			"http://localhost:8080/img/1679011321563-yerba-amanda-500.png"
+		]
 	}
 ]

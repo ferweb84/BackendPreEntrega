@@ -26,8 +26,6 @@ router.get("/:cid", async (req, res) => {
     try {
         const id = req.params.cid
 
-
-
         if (isNaN(id) || id <= 0) {
             return res.status(400).send({
                 status: "error",
@@ -35,15 +33,16 @@ router.get("/:cid", async (req, res) => {
             });
         }
         const cart = await cartmanager.getCartById(Number.parseInt(id));
-        if (cart == 0) {
+        if (cart == 0  ) {
             return res.status(404).send({
                 status: "error",
                 message: { error: `The cart with the ID ${cid} does not exist` },
             });
+            
         }
-      
-
-
+        if (!cart) {
+            return res.status(404).send({ status: 'error', error: 'cart not found' });
+          }
         return res.status(200).send({
             status: "success",
             message: { cart: cart },
@@ -55,9 +54,26 @@ router.get("/:cid", async (req, res) => {
 
 router.post("/:cid/product/:pid", async (req, res) => {
     try {
-        const cId = req.params.cid
+        const cId = req.params.cid;
+        const pId = req.params.pid;
+        const quantity =  req.body.quantity;
+//...............................................................................
+        // if (!quantity){
+        //     return res
+        //     .status(400)
+        //     .send ({status:'error', error: 'invalid product FORMAT'});
+        // }
+        // const result = await cartmanager.addProduct (cId, pId, quantity);
 
-        const pId = req.params.pid
+        // if (!result) {
+        //     return res.status(404).send({ status: 'error', error: 'cart not found' });
+        //   }
+        
+        //   return res.status(200).send({ status: 'success', data: result });
+        
+
+        //..................................................................
+
         if (isNaN(cId) || cId <= 0) {
             return res.status(400).send({
                 status: "error",

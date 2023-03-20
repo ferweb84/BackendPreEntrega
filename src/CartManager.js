@@ -1,5 +1,4 @@
 import fs from "fs";
-
 import { Blob } from "buffer";
 
 
@@ -92,6 +91,7 @@ export default class CartManager {
 
                 let indexValue = result.find((event) => event.id === id);
                 console.log(indexValue)
+            
                 return indexValue;
 
             }
