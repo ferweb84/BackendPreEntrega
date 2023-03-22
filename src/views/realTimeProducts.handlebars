@@ -1,0 +1,72 @@
+<div id="app">
+  <h1>Desafio websocket/ Handlebas /Express Router/Static files /multer</h1>
+
+  <h2> FORMULARIO: </h2>
+
+  <h3>Agregar nuevo producto!</h3>
+  <form action="/api/products" id="addProductForm" method="post" enctype="multipart/form-data">
+    <label for="title">Title</label>
+    <input type="text" name="title" id="title" required />
+    <br /><br />
+    <label for="description">Description</label>
+    <input type="text" name="description" id="description" required />
+    <br /><br />
+    <label for="code">Code</label>
+    <input type="text" name="code" id="code" required />
+    <br /><br />
+    <label for="price">Price</label>
+    <input type="number" name="price" id="price" required />
+    <br /><br />
+    <label for="category">Category</label>
+    <input type="text" name="category" id="category" required />
+    <br />    <br />
+    <label for="status">Status</label>
+    <input type="text" name="status" id="status" required />
+    <br />    <br />
+
+    <label for="stock">Stock</label>
+    <input type="number" name="stock" id="stock" required />
+    <br />
+    <br />
+    <label for="thumbnail">Product Thumbnails</label>
+    <input
+      type="file"
+      id="thumbnail"
+      name="thumbnail"
+      accept="file/*"
+      multiple
+    />
+    <br /><br />
+    <button type="submit">Enviar! </button>
+    <button type="reset">Reset</button>
+  </form>
+  
+  <br /><hr />
+    <h3>Borrar Producto:</h3>
+  <form action="" id="deleteProductForm">
+    <label for="pid">Product ID</label>
+    <input type="text" name="pid" id="pid" required />
+    <button type="submit">Borrar! </button>
+  </form>
+
+  <br /><hr />
+
+  <h3>Crear Carrito:</h3>
+  <form action="/api/carts" method="post" enctype="multipart/form-data">
+    <button type="submit">Crear!</button>
+  </form>
+
+  <br /><hr />
+  
+  <img src="./img/1679513782846-termo_amigo1-e371afd4625939cb8b15804054016385-640-0.jpg" alt="" style="width: 300px" />
+  <img src="./img/1679001914488-yerba-amanda-500.png" alt="" style="width: 100px" />
+ <br /><hr />
+  <span>    Termo + Mate pa´ a el espumoooozoooo....</span>
+  <br /><hr />
+
+  
+  <h2>Todos los Productos:</h2>
+  <div id="productsList"></div>
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/realTimeProducts.js"></script>

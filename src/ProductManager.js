@@ -1,6 +1,7 @@
 import fs from "fs";
 import express from "express";
 import { Blob } from "buffer";
+import socket from "./socket.js";
 
 export default class ProductManager {
     constructor() {
@@ -64,9 +65,14 @@ export default class ProductManager {
                     ? productObjeto = { id: 1, ...productObjeto }
                     : productObjeto = { id: products[products.length - 1].id + 1, ...productObjeto }
                 products.push(productObjeto);
+
                 await fs.promises.writeFile(this.path, JSON.stringify(products, null, "\t"));
+                socket.io.emit("product_added",productObjeto);
                 return productObjeto;
+                
             }
+
+        
 
         } catch (error) {
             console.log(error);

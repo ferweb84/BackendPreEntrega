@@ -70,7 +70,7 @@ router.get("/:pid", async (req, res) => {
     }
 });
 
-router.post("/", uploader.array("thumbnail"), async (req, res) => {
+router.post("/", uploader.array("thumbnail",10), async (req, res) => {
     let newProduct = req.body;
     const files=req.files;
     console.log(newProduct);

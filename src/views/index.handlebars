@@ -1,5 +1,10 @@
 <div>
-    <h1> ¡Hola {{user.name}}!¡ Que gusto verte! </h1>
+    {{!-- <h1>Actividad en clase</h1>
+
+    <input type="text" id="textbox"/>
+    <p id=" log"></p> --}}
+
+    <h2> ¡Bienvenido {{user.name}}!¡ Que gusto verte! </h2>
     {{#if isAdmin}}
         {{#each food}}
         <div>
@@ -12,4 +17,5 @@
     {{/if}}
 
 </div>
+<script src="socket.io/socket.io.js"></script>
 <script src="js/index.js"></script>

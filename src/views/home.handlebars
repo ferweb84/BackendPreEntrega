@@ -1,0 +1,21 @@
+<div id="app">
+    <h2> ¡Hola {{user.name}}!¡ Carrito -  Producto! </h2>
+    {{#if isAdmin}}
+        {{#each products}}
+        <div>
+            <p>{{this.title}}</p>
+            <p>{{this.description}}</p>
+            <p>{{this.code}}</p>
+            <p>{{this.price}}</p>
+            <p>{{this.category}}</p>
+            <p>{{this.thumbnails}}</p>
+            <p>{{this.stock}}</p>
+        </div>
+        {{/each}}
+    {{else}}
+    <p>No tienes permiso para ver la lista de productos</p>
+    {{/if}}
+
+</div>
+<script src="socket.io/socket.io.js"></script>
+<script src="js/index.js"></script>

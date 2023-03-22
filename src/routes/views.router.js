@@ -1,4 +1,5 @@
 import { Router } from "express";
+import ProductManager from "../ProductManager.js";
 
 const router = Router();
 
@@ -22,7 +23,7 @@ const foodArray = [
 ];
 
 const testUser = {
-    name: "emilse",
+    name: "Emilse",
     lastName: "Quiroga",
     age: 20,
     email: "emi@gmail.com",
@@ -40,5 +41,14 @@ router.get ("/",(req,res)=>{
         style: "index.css",
     });
 });
+
+router.get ("/", async (req,res)=>{
+    const products =await ProductManager.getProducts()
+    res.render ("home", {products});
+});
+
+router.get("/realTimeProducts", (req,res)=>{
+    res.render ("realTimeProducts", {});
+})
 
 export default router;

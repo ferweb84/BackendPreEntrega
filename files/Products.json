@@ -121,5 +121,18 @@
 		"thumbnail": [
 			"http://localhost:8080/img/1679011321563-yerba-amanda-500.png"
 		]
+	},
+	{
+		"id": 10,
+		"status": "true",
+		"title": "termo",
+		"description": "Lumilagro",
+		"code": "abc12356",
+		"price": "1567",
+		"category": "bazar",
+		"stock": "45",
+		"thumbnail": [
+			"http://localhost:8080/img/1679513782846-termo_amigo1-e371afd4625939cb8b15804054016385-640-0.jpg"
+		]
 	}
 ]
