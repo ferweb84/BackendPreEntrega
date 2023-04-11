@@ -1,14 +1,16 @@
 import mongoose from "mongoose";
 
-const messageCollection ="Message";
+const messagesCollection = "messages";
 
-//el esquema de nuestra estructura de modelo de mensaje
 const messageSchema = new mongoose.Schema({
-    chating: {
-        type:String,
-        required: true,
-    }
+  user: {
+    type: String,
+    required: true,
+  },
+  message: {
+    type: String,
+    required: true,
+  },
 });
-const messageModel= mongoose.model(messageCollection, messageSchema);
 
-export {messageModel};
+export const messageModel = mongoose.model(messagesCollection, messageSchema);

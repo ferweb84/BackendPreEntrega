@@ -1,54 +1,48 @@
 import express from "express";
 import handlebars from "express-handlebars";
-import {Server} from "socket.io";
-import productsRouter from './routes/productsrouter.js';
-import cartrouter from './routes/cartrouter.js';
-import __dirname from "./utils.js";
-import viewsRouter from "./routes/views.router.js";
-//import chatRouter from "./routes/chat.router.js"
 import socket from "./socket.js";
-import messagesRouter from "./routes/messages.router.js";
-import usersRouter from "./routes/users.router.js"
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-dotenv.config();
 
-const app = express();
+import productsRouter from "./routes/products.router.js";
+import cartsRouter from "./routes/carts.router.js";
+import messagesRouter from "./routes/messages.router.js"
+import viewsRouter from "./routes/views.router.js";
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use("/",express.static(`${__dirname}/public`)); //verificar "/", 
+import __dirname from "./utils.js";
 
-//config Handlebars------------------------------
-app.engine("handlebars", handlebars.engine());
-app.set("views",`${__dirname}/views`);
-app.set("view engine","handlebars");
+const env = async () => {
+  dotenv.config();
 
-const httpServer = app.listen(8080, () => {
-    try {
-        console.log("Servidor arriba en el puerto 8080");
-        
-    } catch (error) {
-        console.log(error);
-    }
-});
+  const PORT = process.env.PORT || 8080;
+  const DB_NAME = process.env.DB_NAME;
+  const DB_USERNAME = process.env.DB_USERNAME;
+  const DB_PASSWORD = process.env.DB_PASSWORD;
 
-//estas variables las utilizo para reemplazar en mongoos.connect el usuario y la contraseña para que no aparezcan y no exponemos nuestra base de datos
-const dbUser = process.env.DB_USER;
-const dbPassword = process.env.DB_PASSWORD;
-const dbName = process.env.DB_NAME;
+  const app = express();
 
-//MONGOOSE colocar el password de la base de datos y el nombre y con las variables anteriores en . env ; tenemos nuestras credenciales protegidas 
-mongoose.connect(`mongodb+srv://${dbUser}:${dbPassword}@codercluster.ljckttz.mongodb.net/${dbName}?retryWrites=true&w=majority`)
+  app.use(express.json());
+  app.use(express.urlencoded({ extended: true }));
+  app.use(express.static(`${__dirname}/public`));
 
-//creamos las rutas aqui y le decimos que utilice el usersRouter
-app.use("/api/users", usersRouter);
-//creamos las rutas aqui y le decimos que utilice el messagesRouter
-app.use("/api/messages", messagesRouter);
-app.use("/api/products", productsRouter);
-app.use("/api/carts",cartrouter);
-app.use("/",viewsRouter);
+  app.use("/api/products", productsRouter);
+  app.use("/api/carts", cartsRouter);
+  app.use("/api/messages", messagesRouter);
+  app.use("/", viewsRouter);
 
-//app.use("/chat",chatRouter);
+  app.engine("handlebars", handlebars.engine());
+  app.set("view engine", "handlebars");
+  app.set("views", __dirname + "/views");
 
-socket.connect (httpServer);
+  const httpServer = app.listen(`${PORT}`, () =>
+    console.log("Server up in port 8080!")
+  );
+
+  mongoose.connect(
+    `mongodb+srv://${DB_USERNAME}:${DB_PASSWORD}@${DB_NAME}.lihzhkv.mongodb.net/?retryWrites=true&w=majority`
+  );
+
+  socket.connect(httpServer);
+};
+
+env();
