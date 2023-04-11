@@ -1,5 +1,6 @@
 import fs from "fs";
 import { Blob } from "buffer";
+import __dirname from "../../utils.js";
 
 
 export default class CartManager {

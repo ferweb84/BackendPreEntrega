@@ -2,6 +2,7 @@ import fs from "fs";
 import express from "express";
 import { Blob } from "buffer";
 import socket from "./socket.js";
+import __dirname from "../../utils.js";
 
 export default class ProductManager {
     constructor() {

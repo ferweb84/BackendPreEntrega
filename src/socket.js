@@ -1,5 +1,5 @@
 import { Server } from "socket.io";
-import ProductManager from "./ProductManager.js";
+import ProductManager from "./dao/filesManagers/ProductManager.js";
 
 const socket ={};
 

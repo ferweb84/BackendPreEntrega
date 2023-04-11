@@ -1,7 +1,8 @@
 import { Router } from "express";
-import ProductManager from "../ProductManager.js";
+import ProductManager from "../dao/filesManagers/ProductManager.js";
 
 const router = Router();
+const productmanager = new ProductManager();
 
 const foodArray = [
 {   
@@ -50,5 +51,13 @@ router.get ("/", async (req,res)=>{
 router.get("/realTimeProducts", (req,res)=>{
     res.render ("realTimeProducts", {});
 })
+
+// creamos una ruta que nos permita renderizar la vista que se llama CHAT
+router.get("/",(req,res)=>{
+    res.render("chat",{title:"Chat"});
+});
+//En la plantilla que contiene a chat (html) hay una variable que se llama Title y le doy un valor de Chat, ya creada amos a importarla a App
+
+
 
 export default router;
