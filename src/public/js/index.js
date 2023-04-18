@@ -1,4 +1,4 @@
-const socket = io();
+// const socket = io();
 
 
 //actividad en clase
@@ -32,14 +32,14 @@ const socket = io();
 
 // //.....................................................
 
-socket.emit("product_added", "productObjetooooos");
+// socket.emit("product_added", "productObjetooooos");
 
-socket.on ("product_added1", (data)=>{
-    console.log (data);
-});
-socket.emit ("product_added2", "productObjetoooo2");
+// socket.on ("product_added1", (data)=>{
+//     console.log (data);
+// });
+// socket.emit ("product_added2", "productObjetoooo2");
 
-socket.on ("message3", (data)=>{
-    console.log(data);
-})
-console.log ("hola, estoy ejecutando un script desde una plantilla");
+// socket.on ("message3", (data)=>{
+//     console.log(data);
+// })
+// console.log ("hola, estoy ejecutando un script desde una plantilla");

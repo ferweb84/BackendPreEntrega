@@ -13,32 +13,52 @@ const router = Router();
 
 router.get("/", async (req, res) => {
   try {
-    const limit = req.query.limit;
-    const products = await productManager.getProducts();
-    const limitedProducts = products.slice(0, limit);
+    const {
+      limit = 10,
+      page = 1,
+      category = null,
+      available = null,
+      sort = null,
+    } = req.query;
+
+    const products = await productManager.getProducts(
+      page,
+      limit,
+      category,
+      available,
+      sort
+    );
 
     if (!products)
       return res.status(404).send({
         status: "error",
-        message: { error: `No products found` },
-      });
-
-    if (!limit)
-      return res.status(200).send({
-        status: "success",
-        payload: products,
+        error: `No products found`,
       });
 
     if (isNaN(limit)) {
       return res.status(400).send({
         status: "error",
-        message: { error: `Limit ${limit} is not a valid value` },
+        error: `Limit ${limit} is not a valid value`,
+      });
+    }
+
+    if (isNaN(page)) {
+      return res.status(400).send({
+        status: "error",
+        error: `Page ${page} is not a valid value`,
+      });
+    }
+
+    if (isNaN(sort) && sort !== null) {
+      return res.status(400).send({
+        status: "error",
+        error: `Sort value ${sort} is not a valid value`,
       });
     }
 
     res.status(200).send({
-      status: "Success",
-      payload: limitedProducts,
+      status: "success",
+      payload: products,
     });
   } catch (error) {
     console.log(`Cannot get products with mongoose ${error}`);
@@ -53,7 +73,7 @@ router.get("/:pid", async (req, res) => {
     if (!filteredProduct || filteredProduct == 0)
       return res.status(404).send({
         status: "error",
-        message: { error: `Product with ID ${pid} was not found` },
+        error: `Product with ID ${pid} was not found`,
       });
 
     return res.status(200).send({
@@ -79,7 +99,7 @@ router.post("/", uploader.array("thumbnails"), async (req, res) => {
     if (!req.files && !thumbnails) {
       return res.status(400).send({
         status: "error",
-        message: { error: `Thumbnails could not be saved` },
+        error: `Thumbnails could not be saved`,
       });
     }
 
@@ -98,7 +118,7 @@ router.post("/", uploader.array("thumbnails"), async (req, res) => {
     if (!addedProduct) {
       return res.status(400).send({
         status: "error",
-        message: { error: "Product couldn't be added." },
+        error: "Product couldn't be added.",
       });
     }
 
@@ -120,7 +140,7 @@ router.put("/:pid", async (req, res) => {
     if (!updateProd || !updateId) {
       return res.status(400).send({
         status: "error",
-        message: { error: "Incomplete values" },
+        error: "Incomplete values",
       });
     }
 
@@ -149,7 +169,7 @@ router.delete("/:pid", async (req, res) => {
     if (!deleteId) {
       return res.status(400).send({
         status: "error",
-        message: { error: "Incomplete values" },
+        error: "Incomplete values",
       });
     }
 
